@@ -1,4 +1,4 @@
-/api/*   http://localhost:5000/api/:splat   200
-/auth/*  http://localhost:5000/auth/:splat  200
-/*       /index.html                        200
+﻿/api/*   http://dasinshop-be-env.eba-ppnfum43.ap-southeast-2.elasticbeanstalk.com/api/:splat   200
+/auth/*  http://dasinshop-be-env.eba-ppnfum43.ap-southeast-2.elasticbeanstalk.com/auth/:splat  200
+/*       /index.html                                                                            200
 
