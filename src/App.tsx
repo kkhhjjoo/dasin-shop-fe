@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Nav from './components/Nav';
 import ProductDetail from './components/ProductDetail';
 import SignUp from './pages/SignUp';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -18,6 +19,14 @@ function App() {
                 <ProductDetail />
               </main>
             </>
+          }
+        />
+        <Route
+          path='/login'
+          element={
+            <main>
+              <Login />
+            </main>
           }
         />
         <Route

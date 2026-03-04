@@ -1,7 +1,10 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000'
+
+const emailRegex = /^[^\s@]+@[^\s@]+?\.[^\s@]+$/
+const nameRegex = /^[가-힣a-zA-Z0-9\s]+$/
 
 export default function SignUp() {
   const navigate = useNavigate()
@@ -43,6 +46,10 @@ export default function SignUp() {
       setError('이메일을 입력해 주세요.')
       return
     }
+    if (!emailRegex.test(email.trim())) {
+      setError('이메일 형식이 올바르지 않습니다.')
+      return
+    }
     if (!nickname.trim()) {
       setError('닉네임을 입력해 주세요.')
       return
@@ -51,12 +58,29 @@ export default function SignUp() {
       setError('비밀번호를 입력해 주세요.')
       return
     }
+    if (password.length < 8) {
+      setError('비밀번호는 8자 이상 입력해 주세요.')
+      return
+    }
+    if (password.length > 64) {
+      setError('비밀번호는 64자 이하로 입력해 주세요.')
+      return
+    }
+    const simplePasswords = ['password', '1234', '12345', '123456', '12345678']
+    if (simplePasswords.includes(password.toLowerCase())) {
+      setError('너무 쉬운 비밀번호입니다. 다른 비밀번호를 사용해 주세요.')
+      return
+    }
     if (password !== passwordConfirm) {
       setError('비밀번호가 일치하지 않습니다.')
       return
     }
     if (!name.trim()) {
       setError('이름을 입력해 주세요.')
+      return
+    }
+    if (!nameRegex.test(name.trim())) {
+      setError('이름에는 특수문자나 이모지를 사용할 수 없습니다.')
       return
     }
     if (!agreeAge || !agreeTerms || !agreePrivacy) {
@@ -84,7 +108,11 @@ export default function SignUp() {
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) {
-        setError(data.error || '회원가입에 실패했습니다.')
+        if (res.status === 409) {
+          setError('이미 존재하는 이메일입니다. 다른 이메일로 가입해 주세요.')
+        } else {
+          setError(data.error || '회원가입에 실패했습니다.')
+        }
         return
       }
       alert('회원가입이 완료되었습니다.')

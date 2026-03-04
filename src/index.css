@@ -748,3 +748,119 @@ ul, ol {
 .modal-actions .btn-ghost:hover {
   color: var(--color-text);
 }
+
+/* Login Page */
+.login-page {
+  padding: 32px 0 64px;
+  background: var(--color-bg);
+}
+.login-container {
+  max-width: 420px;
+  margin: 0 auto;
+}
+.login-card {
+  border-radius: 10px;
+  padding: 24px 24px 28px;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.login-field {
+  margin-bottom: 4px;
+}
+.login-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  font-size: 0.95rem;
+}
+.login-input::placeholder {
+  color: #aaa;
+}
+.login-coupon-bubble {
+  margin: 10px 0 6px;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  background: #fffdf0;
+  border-radius: 18px;
+  display: inline-block;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+.login-coupon-text {
+  color: #ff3366;
+  font-weight: 600;
+}
+.login-social {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+.login-social--kakao {
+  background: #fee500;
+  border-color: #f0d800;
+}
+.login-social--naver {
+  background: #fff;
+}
+.login-social--apple {
+  background: #fff;
+}
+.login-social-icon {
+  font-size: 1.1rem;
+}
+.login-social-icon--naver {
+  font-weight: 800;
+  color: #03c75a;
+}
+.login-error {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  color: #c00;
+  text-align: center;
+}
+.login-button {
+  margin-top: 6px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  font-size: 0.98rem;
+}
+.login-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+.login-links {
+  margin-top: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+.login-link-button {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+.login-link-button:hover {
+  color: var(--color-primary);
+}
+.login-links-sep {
+  color: var(--color-border);
+}
