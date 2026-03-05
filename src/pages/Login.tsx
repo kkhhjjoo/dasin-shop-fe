@@ -1,4 +1,4 @@
-﻿import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 const API_BASE = import.meta.env.VITE_API_BASE || ''
@@ -9,6 +9,15 @@ export default function Login() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+
+  // 이미 로그인된 상태면 메인으로 보내기
+  useEffect(() => {
+    const token = localStorage.getItem('dasin_token')
+    const storedUser = localStorage.getItem('dasin_user')
+    if (token && storedUser) {
+      navigate('/', { replace: true })
+    }
+  }, [navigate])
 
   const handleKakaoLogin = () => {
     window.location.href = `${API_BASE}/auth/kakao`
@@ -56,7 +65,8 @@ export default function Login() {
       }
 
       alert('로그인 되었습니다.')
-      navigate('/')
+      // 전체 페이지를 새로고침해서 App의 useEffect가 /api/me를 다시 호출하도록 함
+      window.location.href = '/'
     } catch {
       setError('서버에 연결할 수 없습니다. 잠시 후 다시 시도해 주세요.')
     } finally {

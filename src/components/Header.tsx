@@ -1,6 +1,11 @@
 import { Link } from 'react-router-dom';
 
-export default function Header() {
+type HeaderProps = {
+  userName?: string | null;
+  onLogout?: () => void;
+};
+
+export default function Header({ userName, onLogout }: HeaderProps) {
   return (
     <header className='header'>
       <div className='header-top'>
@@ -9,7 +14,17 @@ export default function Header() {
             DASHIN
           </Link>
           <nav className='header-nav'>
-            <Link to='/login'>로그인</Link>
+            {userName ? (
+              <button
+                type='button'
+                className='header-link-button'
+                onClick={onLogout}
+              >
+                로그아웃
+              </button>
+            ) : (
+              <Link to='/login'>로그인</Link>
+            )}
             <Link to='/signup'>
               회원가입 <span className='badge'>10%할인 쿠폰 즉시 지급</span>
             </Link>
@@ -17,6 +32,9 @@ export default function Header() {
             <a href='/wish'>즐겨찾기</a>
           </nav>
           <div className='header-utils'>
+            {userName && (
+              <span className='header-greeting'>{userName}님 반갑습니다.</span>
+            )}
             <a href='/cart' className='cart-btn'>
               장바구니 <strong>0</strong>
             </a>

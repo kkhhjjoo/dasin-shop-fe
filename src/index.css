@@ -86,6 +86,26 @@ ul, ol {
   color: var(--color-accent);
   margin-left: 4px;
 }
+.header-link-button {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+.header-link-button:hover {
+  color: var(--color-primary);
+}
+.header-utils {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header-greeting {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
 .cart-btn {
   padding: 8px 16px;
   background: var(--color-primary);
