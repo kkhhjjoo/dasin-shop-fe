@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import styles from './product-tabs.module.css'
 
 const TABS = [
   { id: 'detail', label: '상세설명' },
@@ -17,13 +18,13 @@ export default function ProductTabs() {
   const [activeTab, setActiveTab] = useState('detail')
 
   return (
-    <div className="product-tabs">
-      <ul className="tab-list">
+    <div className={styles.productTabs}>
+      <ul className={styles.tabList}>
         {TABS.map((tab) => (
           <li key={tab.id}>
             <button
               type="button"
-              className={activeTab === tab.id ? 'active' : ''}
+              className={activeTab === tab.id ? styles.active : ''}
               onClick={() => setActiveTab(tab.id)}
             >
               {tab.label}
@@ -32,31 +33,31 @@ export default function ProductTabs() {
         ))}
       </ul>
 
-      <div className="tab-content">
+      <div className={styles.tabContent}>
         {activeTab === 'detail' && (
-          <div className="tab-panel">
+          <div className={styles.tabPanel}>
             <p>상세설명 영역입니다. 실제 상품 이미지와 설명이 들어갑니다.</p>
           </div>
         )}
         {activeTab === 'purchase' && (
-          <div className="tab-panel">
+          <div className={styles.tabPanel}>
             <h4>배송 안내</h4>
             <p>다신 배송 상품(상온/냉동), 입점사 상품 구분 없이 주문 당 배송비는 한 번만 발생합니다.</p>
             <p>최소 구매 금액 1만원부터 주문하실 수 있습니다.</p>
           </div>
         )}
         {activeTab === 'reviews' && (
-          <div className="tab-panel">
-            <div className="reviews-summary">
+          <div className={styles.tabPanel}>
+            <div className={styles.reviewsSummary}>
               <span>사용자 총 평점 <strong>4.9</strong></span>
               <span>17,019건의 후기 중 93% 고객이 5점을 주었어요.</span>
             </div>
-            <ul className="review-list">
+            <ul className={styles.reviewList}>
               {SAMPLE_REVIEWS.map((r, i) => (
-                <li key={i} className="review-item">
-                  <div className="review-meta">
-                    <span className="author">{r.author}</span>
-                    <span className="rating">{'★'.repeat(r.rating)}</span>
+                <li key={i} className={styles.reviewItem}>
+                  <div className={styles.reviewMeta}>
+                    <span className={styles.author}>{r.author}</span>
+                    <span className={styles.rating}>{'★'.repeat(r.rating)}</span>
                   </div>
                   <p>{r.text}</p>
                 </li>
@@ -65,7 +66,7 @@ export default function ProductTabs() {
           </div>
         )}
         {activeTab === 'spec' && (
-          <div className="tab-panel">
+          <div className={styles.tabPanel}>
             <p>닭신 오븐구이 닭안심살 제품정보 (영양성분, 원재료 등)</p>
           </div>
         )}

@@ -1,0 +1,80 @@
+.productTabs {
+  margin-top: 48px;
+  border-top: 2px solid var(--color-border);
+}
+
+.tabList {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tabList button {
+  padding: 14px 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+}
+
+.tabList button:hover {
+  color: var(--color-primary);
+}
+
+.active {
+  color: var(--color-primary);
+  font-weight: 600;
+  border-bottom-color: var(--color-primary);
+}
+
+.tabContent {
+  padding: 24px 0;
+  min-height: 200px;
+}
+
+.tabPanel {
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.reviewsSummary {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: var(--color-bg-subtle);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
+.reviewsSummary strong {
+  color: var(--color-primary);
+}
+
+.reviewList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.reviewItem {
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+}
+
+.reviewMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+}
+
+.author {
+  color: var(--color-text-muted);
+}
+
+.rating {
+  color: #f5a623;
+}

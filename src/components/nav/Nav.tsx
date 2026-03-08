@@ -1,19 +1,12 @@
-const CATEGORIES = [
-  '전체 카테고리',
-  '찐살복구 특가',
-  'BEST',
-  'SALE',
-  'NEW',
-  '식단프로그램',
-  '무료배송',
-  '이벤트&쿠폰',
-]
+import styles from './nav.module.css';
+
+const CATEGORIES = ['전체 카테고리', 'BEST', 'SALE', 'NEW', '식단프로그램', '이벤트&쿠폰'];
 
 export default function Nav() {
   return (
-    <nav className="main-nav">
+    <nav className={styles.mainNav}>
       <div className="container">
-        <ul className="nav-list">
+        <ul className={styles.navList}>
           {CATEGORIES.map((item) => (
             <li key={item}>
               <a href="#">{item}</a>
@@ -22,5 +15,5 @@ export default function Nav() {
         </ul>
       </div>
     </nav>
-  )
+  );
 }

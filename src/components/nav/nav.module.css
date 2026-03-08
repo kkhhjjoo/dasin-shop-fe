@@ -1,0 +1,27 @@
+.mainNav {
+  border-bottom: 2px solid var(--color-primary);
+  background: #fff;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.navList a {
+  display: block;
+  padding: 14px 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.navList a:hover {
+  color: var(--color-primary);
+}
+
+.navList li:first-child a {
+  font-weight: 700;
+  color: var(--color-primary);
+}

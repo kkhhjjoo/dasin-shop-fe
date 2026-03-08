@@ -1,0 +1,77 @@
+.header {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.headerTop {
+  padding: 12px 0;
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  letter-spacing: 0.05em;
+}
+
+.headerRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.headerNav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.headerNav a:hover {
+  color: var(--color-primary);
+}
+
+.headerLinkButton {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.headerLinkButton:hover {
+  color: var(--color-primary);
+}
+
+.headerUtils {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.headerGreeting {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.cartBtn {
+  padding: 8px 16px;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.cartBtn:hover {
+  background: var(--color-primary-dark);
+}
+

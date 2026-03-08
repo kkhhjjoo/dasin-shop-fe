@@ -1,0 +1,46 @@
+.introRoot {
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.introLogo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: #f2665c;
+}
+
+.introMark {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 6px solid currentColor;
+  border-bottom-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.introDash {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 6px solid currentColor;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  transform: rotate(-45deg);
+}
+
+.introText {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+

@@ -1,0 +1,483 @@
+.adminPage {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.adminPageTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #e0e0e0;
+  margin-bottom: 24px;
+}
+
+.tab {
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  font-size: 15px;
+  color: #666;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+}
+
+.tab:hover {
+  color: #333;
+}
+
+.tabActive {
+  color: #2d7a4f;
+  font-weight: 600;
+  border-bottom-color: #2d7a4f;
+}
+
+.dashboardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.dashboardCard {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+}
+
+.dashboardCardValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d7a4f;
+}
+
+.dashboardCardLabel {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.sectionTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th,
+.table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.table tr:hover td {
+  background: #fafafa;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.badgeAdmin {
+  background: #e8f5ee;
+  color: #2d7a4f;
+}
+
+.badgeCustomer {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.btnDanger {
+  padding: 6px 12px;
+  font-size: 13px;
+  background: #c62828;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btnDanger:hover {
+  background: #b71c1c;
+}
+
+.bulkSection {
+  margin-bottom: 24px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.bulkSection h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.bulkTextarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  font-family: monospace;
+  font-size: 13px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  resize: vertical;
+  margin-bottom: 12px;
+}
+
+.btnPrimary {
+  padding: 8px 16px;
+  font-size: 14px;
+  background: #2d7a4f;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btnPrimary:hover {
+  background: #236341;
+}
+
+.loading,
+.empty {
+  text-align: center;
+  padding: 48px 16px;
+  color: #666;
+}
+
+.error {
+  color: #c62828;
+  padding: 12px;
+  background: #ffebee;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+
+.productImage {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.productName {
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.productRowClickable {
+  cursor: pointer;
+}
+
+.productRowClickable:hover td {
+  background: #f0f7f2 !important;
+}
+
+.tableActions {
+  display: flex;
+  gap: 6px;
+}
+
+.productSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.btnSecondary {
+  padding: 6px 12px;
+  font-size: 13px;
+  background: #f5f5f5;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btnSecondary:hover {
+  background: #eee;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 560px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px 16px;
+}
+
+.modalTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  color: #1a1a1a;
+}
+
+.modalClose {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: #888;
+  cursor: pointer;
+  padding: 4px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.modalClose:hover {
+  color: #333;
+  background: #f5f5f5;
+}
+
+.formGrid {
+  padding: 0 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.formRow {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formRowFull {
+  grid-column: 1 / -1;
+}
+
+.formRowPair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.formRow label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  display: block;
+}
+
+.formRow input,
+.formRow textarea,
+.formRow select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #fff;
+}
+
+.formRow textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.formRow input::placeholder,
+.formRow textarea::placeholder {
+  color: #aaa;
+}
+
+.formRow input:focus,
+.formRow textarea:focus,
+.formRow select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+.formRow select {
+  cursor: pointer;
+  appearance: auto;
+}
+
+/* 이미지 영역 - Cloudinary 스타일 업로드 존 */
+.formImageWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cloudinaryUploadZone {
+  background: #f8f9fa;
+  border: 2px dashed #cbd5e0;
+  border-radius: 8px;
+  padding: 28px 20px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.cloudinaryUploadZone:hover {
+  border-color: #2563eb;
+  background: #f0f7ff;
+}
+
+.uploadZoneInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.uploadCloudIcon {
+  font-size: 3rem;
+  color: #94a3b8;
+  line-height: 1;
+}
+
+.uploadZoneText {
+  margin: 0;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.uploadZoneOr {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #334155;
+  font-weight: 500;
+}
+
+.btnBrowse {
+  margin-top: 4px;
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: #2563eb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btnBrowse:hover {
+  background: #1d4ed8;
+}
+
+.uploadZoneHint {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+  padding: 10px 12px;
+  background: #f1f5f9;
+  border-radius: 6px;
+}
+
+.formImageUrlInput {
+  padding: 10px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.formImagePreview {
+  margin-top: 4px;
+  width: 64px;
+  height: 64px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid #eee;
+}
+
+/* 모달 제출 버튼 - 파란색, 왼쪽 정렬 */
+.modalFooter {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 20px 24px 24px;
+  border-top: 1px solid #eee;
+}
+
+.modalSubmit {
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background: #2563eb;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modalSubmit:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.modalSubmit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

@@ -1,3 +1,5 @@
+import styles from './product-options.module.css';
+
 interface ProductOptionsProps {
   label: string
   options: string[]
@@ -7,10 +9,10 @@ interface ProductOptionsProps {
 
 export default function ProductOptions({ label, options, value, onChange }: ProductOptionsProps) {
   return (
-    <div className="product-option">
-      <label className="option-label">{label}</label>
+    <div className={styles.productOption}>
+      <label className={styles.optionLabel}>{label}</label>
       <select
-        className="option-select"
+        className={styles.optionSelect}
         value={value}
         onChange={(e) => onChange(e.target.value)}
       >
