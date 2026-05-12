@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/api/*"
+  to = "https://dasinshop-env.eba-nxnkmdvw.ap-southeast-2.elasticbeanstalk.com/api/:splat"
+  status = 200
+  force = true
