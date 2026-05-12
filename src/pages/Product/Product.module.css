@@ -132,7 +132,7 @@
 .productCardPrice {
   font-size: 18px;
   font-weight: 700;
-  color: #333;
+  color: #1a1a1a;
 }
 
 .productCardOriginalPrice {
@@ -195,4 +195,38 @@
 
 .productPageError {
   color: #c62828;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+  padding: 16px 0;
+}
+
+.paginationBtn {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.paginationBtn:hover:not(:disabled) {
+  background: #f5f5f5;
+  border-color: #2d7a4f;
+  color: #2d7a4f;
+}
+
+.paginationBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.paginationInfo {
+  font-size: 14px;
+  color: #666;
 }

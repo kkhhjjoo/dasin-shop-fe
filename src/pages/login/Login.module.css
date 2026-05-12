@@ -1,21 +1,107 @@
 .login-page {
+  min-height: calc(100vh - 120px);
   padding: 32px 0 64px;
   background: var(--color-bg);
+  display: flex;
+  align-items: center;
 }
 
 .login-container {
-  max-width: 420px;
-  margin: 0 auto;
+  max-width: 360px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .login-card {
   border-radius: 10px;
-  padding: 24px 24px 28px;
+  padding: 22px 20px 22px;
   background: #fff;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   display: flex;
+  width: 500px;
   flex-direction: column;
   gap: 12px;
+}
+
+.social-login {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 2px;
+}
+
+.social-login-title {
+  font-size: 0.86rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.social-icon-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.social-icon-btn--kakao {
+  background: #fee500;
+  border-color: #f0d800;
+}
+
+.social-icon-btn--naver {
+  background: #03c75a;
+  border-color: #03c75a;
+}
+
+.google-g {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #4285f4;
+}
+
+.kakao-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #111;
+  display: inline-block;
+}
+
+.naver-n {
+  font-weight: 900;
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.divider-line {
+  height: 1px;
+  flex: 1;
+  background: var(--color-border);
+}
+
+.divider-text {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
 }
 
 .login-field {
@@ -34,56 +120,6 @@
   color: #aaa;
 }
 
-.login-coupon-bubble {
-  margin: 10px 0 6px;
-  padding: 10px 14px;
-  font-size: 0.85rem;
-  background: #fffdf0;
-  border-radius: 18px;
-  display: inline-block;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.login-coupon-text {
-  color: #ff3366;
-  font-weight: 600;
-}
-
-.login-social {
-  width: 100%;
-  padding: 12px 14px;
-  border-radius: 8px;
-  border: 1px solid var(--color-border);
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-size: 0.95rem;
-}
-
-.login-social--kakao {
-  background: #fee500;
-  border-color: #f0d800;
-}
-
-.login-social--naver {
-  background: #fff;
-}
-
-.login-social--apple {
-  background: #fff;
-}
-
-.login-social-icon {
-  font-size: 1.1rem;
-}
-
-.login-social-icon--naver {
-  font-weight: 800;
-  color: #03c75a;
-}
-
 .login-error {
   margin: 8px 0 0;
   font-size: 0.85rem;
@@ -94,11 +130,11 @@
 .login-button {
   margin-top: 6px;
   width: 100%;
-  padding: 14px;
+  padding: 10px 12px;
   border-radius: 8px;
   border: 1px solid var(--color-border);
   background: #fff;
-  font-size: 0.98rem;
+  font-size: 0.92rem;
 }
 
 .login-button:disabled {
@@ -132,4 +168,3 @@
 .login-links-sep {
   color: var(--color-border);
 }
-

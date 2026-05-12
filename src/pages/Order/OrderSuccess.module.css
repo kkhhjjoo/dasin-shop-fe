@@ -1,0 +1,205 @@
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 16px 48px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 16px;
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.checkmark {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 32px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 8px;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #666;
+  margin: 0 0 32px;
+  line-height: 1.5;
+}
+
+.summary {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.label {
+  color: #666;
+  font-size: 0.92rem;
+}
+
+.value {
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.totalValue {
+  color: #1a1a1a;
+  font-size: 1.2rem;
+}
+
+.subrow {
+  text-align: right;
+  font-size: 0.82rem;
+  color: #888;
+  padding-top: 6px;
+}
+
+.itemsSection,
+.shipSection {
+  text-align: left;
+  margin-bottom: 28px;
+}
+
+.sectionTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #1a1a1a;
+}
+
+.itemList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.itemBody {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  flex: 1;
+}
+
+.itemName {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.itemOptions {
+  font-size: 13px;
+  color: #555;
+}
+
+.itemQty {
+  font-size: 13px;
+  color: #888;
+}
+
+.itemSubtotal {
+  font-weight: 700;
+  color: #1a1a1a;
+  white-space: nowrap;
+  margin-left: 12px;
+}
+
+.shipName {
+  margin: 4px 0;
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.shipAddress {
+  margin: 4px 0;
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.shipMemo {
+  margin: 6px 0 0;
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  display: inline-block;
+  padding: 14px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.primaryBtn {
+  background: #1a1a1a;
+  color: #fff;
+  border: 1px solid #1a1a1a;
+}
+
+.primaryBtn:hover {
+  background: #333;
+}
+
+.secondaryBtn {
+  background: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.secondaryBtn:hover {
+  background: #f5f5f5;
+}

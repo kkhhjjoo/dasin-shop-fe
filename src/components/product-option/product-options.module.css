@@ -7,14 +7,33 @@
   font-size: 0.9rem;
   font-weight: 600;
   margin-bottom: 8px;
+  color: #1a1a1a;
 }
 
 .optionSelect {
+  display: block;
   width: 100%;
   max-width: 360px;
-  padding: 10px 12px;
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
+  padding: 12px 40px 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
   font-size: 0.95rem;
-  background: #fff;
+  font-family: inherit;
+  color: #1a1a1a;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23374a51' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  appearance: none;
+  cursor: pointer;
+}
+
+.optionSelect:hover {
+  border-color: #9ca3af;
+}
+
+.optionSelect:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
 }

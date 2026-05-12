@@ -1,6 +1,6 @@
 import styles from './nav.module.css';
 
-const CATEGORIES = ['전체 카테고리', 'BEST', 'SALE', 'NEW', '식단프로그램', '이벤트&쿠폰'];
+const CATEGORIES = ['전체 카테고리', '식단프로그램', '이벤트&쿠폰'];
 
 export default function Nav() {
   return (

@@ -1,0 +1,267 @@
+.page {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 32px 16px 48px;
+}
+
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 8px;
+}
+
+.pageMeta {
+  margin: 0 0 20px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.tabRow {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+}
+
+.tabBtn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  background: #fff;
+  color: #333;
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.tabBtn:hover {
+  background: #f8f9fa;
+  border-color: #bbb;
+}
+
+.tabBtnActive {
+  background: #1a1a1a;
+  border-color: #1a1a1a;
+  color: #fff;
+}
+
+.tabBtnActive:hover {
+  background: #333;
+  border-color: #333;
+  color: #fff;
+}
+
+.tabCount {
+  font-size: 0.8rem;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.stateBox {
+  text-align: center;
+  padding: 64px 24px;
+  background: #f8f9fa;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.stateBox p {
+  margin: 0 0 16px;
+}
+
+.linkBtn {
+  display: inline-block;
+  padding: 10px 24px;
+  background: #1a1a1a;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+}
+
+.linkBtn:hover {
+  background: #333;
+}
+
+.orderList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.orderItem {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 18px 22px 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+.orderHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.orderDate {
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-right: 10px;
+}
+
+.orderNumber {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.statusBadge {
+  padding: 5px 12px;
+  border-radius: 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  background: #eee;
+  color: #555;
+}
+
+.status_pending {
+  background: #fff5e1;
+  color: #b8860b;
+}
+
+.status_paid {
+  background: #e6f4ff;
+  color: #1565c0;
+}
+
+.status_preparing {
+  background: #f3e8ff;
+  color: #6d28d9;
+}
+
+.status_shipped {
+  background: #e0f2fe;
+  color: #0277bd;
+}
+
+.status_delivered {
+  background: #e6f7e6;
+  color: #2e7d32;
+}
+
+.status_cancelled {
+  background: #fdecea;
+  color: #c62828;
+}
+
+.status_refunded {
+  background: #f5f5f5;
+  color: #555;
+}
+
+.orderBody {
+  padding: 14px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.orderSummary {
+  margin: 0 0 12px;
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.itemList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.itemName {
+  color: #1a1a1a;
+  font-weight: 500;
+}
+
+.itemOptions {
+  color: #777;
+  font-size: 0.85rem;
+}
+
+.itemQty {
+  color: #888;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.itemPrice {
+  color: #1a1a1a;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.orderFooter {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 14px;
+}
+
+.priceLabel {
+  color: #666;
+  font-size: 0.92rem;
+}
+
+.priceValue {
+  color: #1a1a1a;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.cancelBtn {
+  margin-left: 12px;
+  padding: 8px 16px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  color: #555;
+  font-size: 0.88rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.cancelBtn:hover {
+  background: #f5f5f5;
+  border-color: #c62828;
+  color: #c62828;
+}

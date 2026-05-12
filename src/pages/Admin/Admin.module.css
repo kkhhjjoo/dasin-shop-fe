@@ -208,6 +208,39 @@
   white-space: nowrap;
 }
 
+.priceCell {
+  white-space: nowrap;
+}
+
+.priceCell .priceOriginal {
+  font-size: 13px;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.priceCell .priceSale {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.priceCell .priceDiscount {
+  font-size: 13px;
+  font-weight: 600;
+  color: #e53935;
+}
+
+.skuCell {
+  font-family: monospace;
+  font-size: 13px;
+  color: #555;
+  min-width: 120px;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .productRowClickable {
   cursor: pointer;
 }
@@ -242,6 +275,71 @@
 
 .btnSecondary:hover {
   background: #eee;
+}
+
+.orderFilterSelect {
+  min-width: 180px;
+  padding: 8px 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 14px;
+}
+
+.orderStatusSelect {
+  min-width: 120px;
+  padding: 6px 8px;
+  border: 1px solid #d8d8d8;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 13px;
+  color: #333;
+  cursor: pointer;
+}
+
+.orderStatusSelect:hover:not(:disabled) {
+  border-color: #1a1a1a;
+}
+
+.orderStatusSelect:disabled {
+  background: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.badgeOrderPending {
+  background: #fff3e0;
+  color: #8d6e63;
+}
+
+.badgeOrderPaid {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badgeOrderPreparing {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.badgeOrderShipped {
+  background: #e8eaf6;
+  color: #3949ab;
+}
+
+.badgeOrderDelivered {
+  background: #e0f2f1;
+  color: #00695c;
+}
+
+.badgeOrderCancelled {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.badgeOrderRefunded {
+  background: #f3e5f5;
+  color: #7b1fa2;
 }
 
 .modalOverlay {
@@ -480,4 +578,97 @@
 .modalSubmit:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 20px;
+  padding: 16px 0;
+}
+
+.paginationBtn {
+  padding: 8px 16px;
+  font-size: 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.paginationBtn:hover:not(:disabled) {
+  background: #f5f5f5;
+  border-color: #2d7a4f;
+  color: #2d7a4f;
+}
+
+.paginationBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.paginationInfo {
+  font-size: 14px;
+  color: #666;
+}
+
+.optionSectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.optionSectionHeader label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+}
+
+.optionGroup {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: #fafafa;
+}
+
+.optionGroupHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.optionLabelInput {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.choicesList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 8px;
+}
+
+.choiceRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.choiceInput {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 13px;
 }

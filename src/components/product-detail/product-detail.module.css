@@ -107,18 +107,19 @@
 
 .priceSale {
   font-size: 1.75rem;
-  color: var(--color-primary);
+  font-weight: 700;
+  color: #1a1a1a;
 }
 
 .priceOriginal {
   font-size: 1rem;
-  color: var(--color-text-muted);
+  color: #999;
   text-decoration: line-through;
 }
 
 .discountRate {
   font-size: 1rem;
-  color: var(--color-accent);
+  color: #e53935;
   font-weight: 600;
 }
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 import style from './Login.module.css';
 
@@ -29,8 +30,8 @@ export default function Login() {
     window.location.href = `${API_BASE}/api/auth/naver`;
   };
 
-  const handleAppleLogin = () => {
-    window.location.href = `${API_BASE}/auth/apple`;
+  const handleGoogleLogin = () => {
+    toast('구글 로그인은 준비 중입니다.');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -69,7 +70,7 @@ export default function Login() {
         localStorage.setItem('dasin_user', JSON.stringify(data.user));
       }
 
-      alert('로그인 되었습니다.');
+      sessionStorage.setItem('dasin_login_toast', '로그인 되었습니다.');
       // 전체 페이지를 새로고침해서 App의 useEffect가 /api/me를 다시 호출하도록 함
       window.location.href = '/';
     } catch {
@@ -83,32 +84,32 @@ export default function Login() {
     <div className={style['login-page']}>
       <div className={`container ${style['login-container']}`}>
         <form className={style['login-card']} onSubmit={handleSubmit}>
+          <div className={style['social-login']}>
+            <div className={style['social-login-title']}>다른 서비스로 로그인</div>
+            <div className={style['social-icons']}>
+              <button type="button" className={style['social-icon-btn']} onClick={handleGoogleLogin} aria-label="Google로 로그인">
+                <span className={style['google-g']}>G</span>
+              </button>
+              <button type="button" className={`${style['social-icon-btn']} ${style['social-icon-btn--kakao']}`} onClick={handleKakaoLogin} aria-label="Kakao로 로그인">
+                <span className={style['kakao-dot']} />
+              </button>
+              <button type="button" className={`${style['social-icon-btn']} ${style['social-icon-btn--naver']}`} onClick={handleNaverLogin} aria-label="Naver로 로그인">
+                <span className={style['naver-n']}>N</span>
+              </button>
+            </div>
+            <div className={style['divider']}>
+              <span className={style['divider-line']} />
+              <span className={style['divider-text']}>또는</span>
+              <span className={style['divider-line']} />
+            </div>
+          </div>
+
           <div className={style['login-field']}>
             <input type="email" className={style['login-input']} placeholder="이메일 입력" value={email} onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div className={style['login-field']}>
             <input type="password" className={style['login-input']} placeholder="비밀번호 입력" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
-
-          <div className={style['login-coupon-bubble']}>
-            <span role="img" aria-label="gift">
-              🎁
-            </span>{' '}
-            회원가입하고, <span className={style['login-coupon-text']}>10% 할인쿠폰</span> 꼭 받으세요
-          </div>
-
-          <button type="button" className={`${style['login-social']} ${style['login-social--kakao']}`} onClick={handleKakaoLogin}>
-            <span className={style['login-social-icon']}>💬</span>
-            <span>카카오로 시작하기</span>
-          </button>
-          <button type="button" className={`${style['login-social']} ${style['login-social--naver']}`} onClick={handleNaverLogin}>
-            <span className={`${style['login-social-icon']} ${style['login-social-icon--naver']}`}>N</span>
-            <span>네이버로 시작하기</span>
-          </button>
-          <button type="button" className={`${style['login-social']} ${style['login-social--apple']}`} onClick={handleAppleLogin}>
-            <span className={style['login-social-icon']}></span>
-            <span>Apple로 시작하기</span>
-          </button>
 
           {error && (
             <p className={style['login-error']} role="alert">

@@ -3,6 +3,9 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Intro from './components/intro/Intro';
+import { CartProvider } from './context/CartContext';
+import { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const API_BASE = import.meta.env.VITE_API_BASE;
 
@@ -10,6 +13,14 @@ function App() {
   const [user, setUser] = useState<{ name: string; user_type?: string } | null>(null);
   const [showIntro, setShowIntro] = useState(() => !sessionStorage.getItem('dasin_intro_seen'));
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const message = sessionStorage.getItem('dasin_login_toast');
+    if (message) {
+      sessionStorage.removeItem('dasin_login_toast');
+      toast.success(message);
+    }
+  }, []);
 
   useEffect(() => {
     // 0) OAuth 콜백으로 URL에 token이 있으면 저장 후 제거
@@ -107,6 +118,7 @@ function App() {
 
   const handleLogout = () => {
     localStorage.removeItem('dasin_token');
+    localStorage.removeItem('dasin_refresh');
     localStorage.removeItem('dasin_user');
     setUser(null);
     navigate('/', { replace: true });
@@ -117,11 +129,14 @@ function App() {
   }
 
   return (
-    <>
+    <CartProvider key={user ? user.name : 'guest'}>
+      <Toaster position="top-center" />
       <Header userName={user?.name ?? null} isAdmin={user?.user_type === 'admin'} onLogout={handleLogout} />
-      <Outlet />
+      <main style={{ flex: 1 }}>
+        <Outlet />
+      </main>
       <Footer />
-    </>
+    </CartProvider>
   );
 }
 
