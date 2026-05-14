@@ -62,9 +62,15 @@ interface UserItem {
   createdAt: string;
 }
 
+interface OrderUser {
+  _id?: string;
+  email?: string;
+  name?: string;
+}
+
 interface OrderItem {
   _id: string;
-  user?: { email?: string; name?: string };
+  user?: OrderUser | string;
   orderer?: { name?: string; phone?: string; email?: string };
   finalPrice?: number;
   status: string;
@@ -668,8 +674,10 @@ export default function Admin() {
                 <thead>
                   <tr>
                     <th>주문번호</th>
-                    <th>주문자</th>
+                    <th>주문 회원(계정)</th>
+                    <th>주문서 이름</th>
                     <th>연락처</th>
+                    <th>주문서 이메일</th>
                     <th>결제금액</th>
                     <th>상태</th>
                     <th>상태 변경</th>
@@ -680,11 +688,28 @@ export default function Admin() {
                   {filteredOrders.map((o) => {
                     const current = normalizeOrderStatus(o.status);
                     const isLocked = current === '취소' || current === '환불';
+                    const account =
+                      o.user && typeof o.user === 'object' && 'email' in o.user ? (o.user as OrderUser) : null;
                     return (
                       <tr key={o._id}>
                         <td>{o._id.slice(-8).toUpperCase()}</td>
-                        <td>{o.orderer?.name || o.user?.name || '-'}</td>
+                        <td className={style.orderAccountCell}>
+                          {account ? (
+                            <>
+                              <div className={style.orderAccountEmail}>{account.email ?? '-'}</div>
+                              {account.name ? (
+                                <div className={style.orderAccountName}>{account.name}</div>
+                              ) : null}
+                            </>
+                          ) : (
+                            <span className={style.muted} title="회원 정보가 없거나(구데이터) 비로그인 주문입니다.">
+                              -
+                            </span>
+                          )}
+                        </td>
+                        <td>{o.orderer?.name || '-'}</td>
                         <td>{o.orderer?.phone || '-'}</td>
+                        <td className={style.orderAccountCell}>{o.orderer?.email?.trim() || '-'}</td>
                         <td>{typeof o.finalPrice === 'number' ? `${o.finalPrice.toLocaleString()}원` : '-'}</td>
                         <td>
                           <span

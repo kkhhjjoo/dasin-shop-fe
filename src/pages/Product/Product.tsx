@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
+import { productHasConfigurableOptions } from '../../utils/productOptions';
 import style from './Product.module.css';
 
 const API_BASE = import.meta.env.VITE_API_BASE;
@@ -18,6 +19,8 @@ interface ProductItem {
   badge?: string;
   category?: string;
   rank?: number;
+  options?: { label?: string; choices?: string[] }[];
+  variants?: { name?: string }[] | string[];
 }
 
 const SORT_OPTIONS: { value: SortType; label: string }[] = [
@@ -144,6 +147,11 @@ const Product = () => {
                   aria-label="장바구니 담기"
                   onClick={(e) => {
                     e.stopPropagation();
+                    if (productHasConfigurableOptions(product)) {
+                      alert('옵션을 선택한 뒤 장바구니에 담을 수 있습니다.');
+                      navigate(`/detail/${product._id}`);
+                      return;
+                    }
                     addToCart({
                       _id: product._id,
                       name: product.name,

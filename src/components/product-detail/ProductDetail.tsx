@@ -4,7 +4,6 @@ import { useCart } from '../../context/CartContext';
 import ProductOptions from '../product-option/ProductOptions';
 import DeliveryInfo from '../DeliveryInfo';
 import ProductTabs from '../product-tabs/ProductTabs';
-
 import styles from './product-detail.module.css';
 
 interface ProductOptionGroup {
@@ -39,6 +38,29 @@ export default function ProductDetail() {
     return optionValues
       .map((v, i) => (optionGroups[i]?.label ? `${optionGroups[i].label}: ${v}` : v).trim())
       .filter(Boolean);
+  };
+
+  const handleAddToCart = () => {
+    if (!product) return;
+    const token = typeof window !== 'undefined' ? localStorage.getItem('dasin_token') : null;
+    if (!token) {
+      alert('로그인 후 장바구니를 사용할 수 있습니다.');
+      navigate('/login');
+      return;
+    }
+    if (hasOptionGroups && !allOptionsSelected) {
+      alert('옵션을 모두 선택해 주세요.');
+      return;
+    }
+    const opts = buildSelectedOptions();
+    addToCart({
+      _id: product._id,
+      name: product.name,
+      price: product.price,
+      imageUrl: product.imageUrl,
+      quantity: Math.max(1, quantity),
+      ...(opts.length > 0 ? { selectedOptions: opts } : {}),
+    });
   };
 
   const handleBuyNow = () => {
@@ -213,23 +235,7 @@ export default function ProductDetail() {
             </div>
 
             <div className={styles.productActions}>
-              <button
-                type="button"
-                className={styles.btnCart}
-                onClick={() => {
-                  if (product) {
-                    const opts = buildSelectedOptions();
-                    addToCart({
-                      _id: product._id,
-                      name: product.name,
-                      price: product.price,
-                      imageUrl: product.imageUrl,
-                      quantity: Math.max(1, quantity),
-                      ...(opts.length > 0 ? { selectedOptions: opts } : {}),
-                    });
-                  }
-                }}
-              >
+              <button type="button" className={styles.btnCart} onClick={handleAddToCart}>
                 장바구니 담기
               </button>
               <button type="button" className={styles.btnBuy} onClick={handleBuyNow}>

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import {
-  ORDER_STATUS_VALUES,
+  type OrderStatusKo,
   normalizeOrderStatus,
   orderStatusToSlug,
   isCancellableStatus,
@@ -11,7 +11,16 @@ import style from './Orders.module.css';
 
 const API_BASE = import.meta.env.VITE_API_BASE;
 
-type TabValue = 'all' | (typeof ORDER_STATUS_VALUES)[number];
+/** 주문 내역 화면 탭(결제대기·결제완료는 목록에서 제외) */
+const ORDER_TAB_STATUSES = [
+  '상품준비중',
+  '배송중',
+  '배송완료',
+  '취소',
+  '환불',
+] as const satisfies readonly OrderStatusKo[];
+
+type TabValue = 'all' | (typeof ORDER_TAB_STATUSES)[number];
 
 interface OrderItem {
   product?: string;
@@ -42,7 +51,7 @@ interface OrderListItem {
 
 const TABS: { value: TabValue; label: string }[] = [
   { value: 'all', label: '전체' },
-  ...ORDER_STATUS_VALUES.map((value) => ({ value, label: value })),
+  ...ORDER_TAB_STATUSES.map((value) => ({ value, label: value })),
 ];
 
 export default function Orders() {
@@ -97,12 +106,14 @@ export default function Orders() {
 
   const tabCounts = useMemo(() => {
     const counts: Record<string, number> = { all: orders.length };
-    for (const v of ORDER_STATUS_VALUES) {
+    for (const v of ORDER_TAB_STATUSES) {
       counts[v] = 0;
     }
     for (const o of orders) {
       const k = normalizeOrderStatus(o.status);
-      counts[k] = (counts[k] ?? 0) + 1;
+      if ((ORDER_TAB_STATUSES as readonly string[]).includes(k)) {
+        counts[k] = (counts[k] ?? 0) + 1;
+      }
     }
     return counts;
   }, [orders]);
