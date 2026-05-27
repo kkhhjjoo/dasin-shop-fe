@@ -1,4 +1,0 @@
-﻿/api/*   http://dasin-shop-env.eba-mqwig9vh.us-east-2.elasticbeanstalk.com/api/:splat   200
-/auth/*  http://dasin-shop-env.eba-mqwig9vh.us-east-2.elasticbeanstalk.com/auth/:splat  200
-/*       /index.html                                                                            200
-
