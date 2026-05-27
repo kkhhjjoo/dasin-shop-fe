@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { normalizeOrderStatus } from '../../utils/orderStatus';
 import style from './OrderSuccess.module.css';
 
-const API_BASE = import.meta.env.VITE_API_BASE;
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 interface OrderItem {
   product?: string;
@@ -78,9 +78,7 @@ export default function OrderSuccess() {
       <div className={style.page}>
         <div className={style.card}>
           <h1 className={style.title}>주문이 완료되었습니다</h1>
-          <p className={style.subtitle}>
-            {loading ? '주문 정보를 불러오는 중입니다...' : '주문 정보를 찾을 수 없습니다.'}
-          </p>
+          <p className={style.subtitle}>{loading ? '주문 정보를 불러오는 중입니다...' : '주문 정보를 찾을 수 없습니다.'}</p>
           <div className={style.actions}>
             <Link to="/" className={style.secondaryBtn}>
               홈으로
@@ -99,16 +97,8 @@ export default function OrderSuccess() {
   const totalPrice = order.totalPrice ?? 0;
   const discount = order.discountAmount ?? 0;
   const ship = order.shippingAddress;
-  const fullAddress = ship
-    ? [ship.province, ship.district, ship.address, ship.addressDetail]
-        .filter((v) => v && String(v).trim())
-        .join(' ')
-    : '';
-  const paidAt = order.payment?.paidAt
-    ? new Date(order.payment.paidAt).toLocaleString()
-    : order.createdAt
-      ? new Date(order.createdAt).toLocaleString()
-      : '';
+  const fullAddress = ship ? [ship.province, ship.district, ship.address, ship.addressDetail].filter((v) => v && String(v).trim()).join(' ') : '';
+  const paidAt = order.payment?.paidAt ? new Date(order.payment.paidAt).toLocaleString() : order.createdAt ? new Date(order.createdAt).toLocaleString() : '';
   const statusLabel = normalizeOrderStatus(order.status);
 
   return (
@@ -116,9 +106,7 @@ export default function OrderSuccess() {
       <div className={style.card}>
         <div className={style.checkmark}>✓</div>
         <h1 className={style.title}>주문이 완료되었습니다</h1>
-        <p className={style.subtitle}>
-          주문해 주셔서 감사합니다. 주문 내역은 마이 페이지에서 확인하실 수 있습니다.
-        </p>
+        <p className={style.subtitle}>주문해 주셔서 감사합니다. 주문 내역은 마이 페이지에서 확인하실 수 있습니다.</p>
 
         <div className={style.summary}>
           <div className={style.row}>
@@ -141,7 +129,9 @@ export default function OrderSuccess() {
           </div>
           {discount > 0 && (
             <div className={style.subrow}>
-              <span>상품 금액 {totalPrice.toLocaleString()}원 · 할인 -{discount.toLocaleString()}원</span>
+              <span>
+                상품 금액 {totalPrice.toLocaleString()}원 · 할인 -{discount.toLocaleString()}원
+              </span>
             </div>
           )}
         </div>
@@ -154,16 +144,10 @@ export default function OrderSuccess() {
                 <li key={idx} className={style.item}>
                   <div className={style.itemBody}>
                     <span className={style.itemName}>{it.productName}</span>
-                    {Array.isArray(it.selectedOptions) && it.selectedOptions.length > 0 && (
-                      <span className={style.itemOptions}>
-                        {it.selectedOptions.join(', ')}
-                      </span>
-                    )}
+                    {Array.isArray(it.selectedOptions) && it.selectedOptions.length > 0 && <span className={style.itemOptions}>{it.selectedOptions.join(', ')}</span>}
                     <span className={style.itemQty}>수량 {it.quantity}개</span>
                   </div>
-                  <span className={style.itemSubtotal}>
-                    {(it.itemTotal ?? 0).toLocaleString()}원
-                  </span>
+                  <span className={style.itemSubtotal}>{(it.itemTotal ?? 0).toLocaleString()}원</span>
                 </li>
               ))}
             </ul>

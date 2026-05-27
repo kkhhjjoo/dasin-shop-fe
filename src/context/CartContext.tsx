@@ -11,7 +11,7 @@ export interface CartItem {
 }
 
 const BASE_STORAGE_KEY = 'dasin_cart';
-const API_BASE = import.meta.env.VITE_API_BASE;
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 interface CartContextValue {
   items: CartItem[];
@@ -120,9 +120,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
               price: Number(product.price),
               imageUrl: product.imageUrl ? String(product.imageUrl) : undefined,
               quantity: Number(it.quantity ?? 1) || 1,
-              selectedOptions: Array.isArray(it.selectedOptions)
-                ? it.selectedOptions.map((o: unknown) => String(o))
-                : undefined,
+              selectedOptions: Array.isArray(it.selectedOptions) ? it.selectedOptions.map((o: unknown) => String(o)) : undefined,
             } as CartItem;
           })
           .filter((v: CartItem | null): v is CartItem => v !== null);
@@ -155,9 +153,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
             const body = {
               productId: it._id,
               quantity: it.quantity ?? 1,
-              ...(it.selectedOptions && it.selectedOptions.length
-                ? { selectedOptions: it.selectedOptions }
-                : {}),
+              ...(it.selectedOptions && it.selectedOptions.length ? { selectedOptions: it.selectedOptions } : {}),
             };
             fetch(`${API_BASE}/api/cart`, {
               method: 'POST',
@@ -198,17 +194,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const selectedOptions = 'selectedOptions' in item ? item.selectedOptions : undefined;
 
     setItems((prev) => {
-      const existing = prev.find(
-        (i) =>
-          i._id === item._id &&
-          JSON.stringify(i.selectedOptions ?? []) === JSON.stringify(selectedOptions ?? [])
-      );
+      const existing = prev.find((i) => i._id === item._id && JSON.stringify(i.selectedOptions ?? []) === JSON.stringify(selectedOptions ?? []));
       if (existing) {
-        return prev.map((i) =>
-          i._id === item._id
-            ? { ...i, quantity: i.quantity + quantity, ...(selectedOptions !== undefined ? { selectedOptions } : {}) }
-            : i
-        );
+        return prev.map((i) => (i._id === item._id ? { ...i, quantity: i.quantity + quantity, ...(selectedOptions !== undefined ? { selectedOptions } : {}) } : i));
       }
       return [...prev, { ...item, quantity, ...(selectedOptions !== undefined ? { selectedOptions } : {}) }];
     });
@@ -244,15 +232,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    setItems((prev) =>
-      prev.filter(
-        (i) =>
-          !(
-            i._id === productId &&
-            JSON.stringify(i.selectedOptions ?? []) === JSON.stringify(selectedOptions ?? [])
-          )
-      )
-    );
+    setItems((prev) => prev.filter((i) => !(i._id === productId && JSON.stringify(i.selectedOptions ?? []) === JSON.stringify(selectedOptions ?? []))));
 
     if (API_BASE) {
       const body = {
@@ -283,15 +263,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
     if (quantity < 1) {
       // 0 이하가 되면 장바구니에서 제거
-      setItems((prev) =>
-        prev.filter(
-          (i) =>
-            !(
-              i._id === productId &&
-              JSON.stringify(i.selectedOptions ?? []) === JSON.stringify(selectedOptions ?? [])
-            )
-        )
-      );
+      setItems((prev) => prev.filter((i) => !(i._id === productId && JSON.stringify(i.selectedOptions ?? []) === JSON.stringify(selectedOptions ?? []))));
 
       if (API_BASE) {
         const body = {
@@ -313,14 +285,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       return;
     }
 
-    setItems((prev) =>
-      prev.map((i) =>
-        i._id === productId &&
-        JSON.stringify(i.selectedOptions ?? []) === JSON.stringify(selectedOptions ?? [])
-          ? { ...i, quantity }
-          : i
-      )
-    );
+    setItems((prev) => prev.map((i) => (i._id === productId && JSON.stringify(i.selectedOptions ?? []) === JSON.stringify(selectedOptions ?? []) ? { ...i, quantity } : i)));
 
     if (API_BASE) {
       const body = {
@@ -351,15 +316,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const totalCount = useMemo(
-    () => items.reduce((sum, i) => sum + i.quantity, 0),
-    [items]
-  );
+  const totalCount = useMemo(() => items.reduce((sum, i) => sum + i.quantity, 0), [items]);
 
-  const value = useMemo(
-    () => ({ items, addToCart, removeFromCart, updateQuantity, totalCount, clearCart }),
-    [items, addToCart, removeFromCart, updateQuantity, totalCount, clearCart]
-  );
+  const value = useMemo(() => ({ items, addToCart, removeFromCart, updateQuantity, totalCount, clearCart }), [items, addToCart, removeFromCart, updateQuantity, totalCount, clearCart]);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }

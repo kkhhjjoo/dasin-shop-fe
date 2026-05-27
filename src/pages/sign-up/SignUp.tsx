@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import style from './SignUp.module.css';
 
-const API_BASE = import.meta.env.VITE_API_BASE;
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 const emailRegex = /^[^\s@]+@[^\s@]+?\.[^\s@]+$/;
 const nameRegex = /^[가-힣a-zA-Z0-9\s]+$/;
 

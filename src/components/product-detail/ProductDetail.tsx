@@ -24,7 +24,7 @@ interface ProductDetailItem {
   options?: ProductOptionGroup[];
   variants?: { name?: string }[] | string[];
 }
-const API_BASE = import.meta.env.VITE_API_BASE;
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 export default function ProductDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -35,9 +35,7 @@ export default function ProductDetail() {
 
   const buildSelectedOptions = (): string[] => {
     if (optionGroups.length === 0) return [];
-    return optionValues
-      .map((v, i) => (optionGroups[i]?.label ? `${optionGroups[i].label}: ${v}` : v).trim())
-      .filter(Boolean);
+    return optionValues.map((v, i) => (optionGroups[i]?.label ? `${optionGroups[i].label}: ${v}` : v).trim()).filter(Boolean);
   };
 
   const handleAddToCart = () => {
@@ -106,9 +104,7 @@ export default function ProductDetail() {
     if (groups.length > 0) return groups;
     const vars = product?.variants;
     if (!Array.isArray(vars) || vars.length === 0) return [];
-    const choices = vars
-      .map((v) => (v != null && typeof v === 'object' && 'name' in v ? String((v as { name?: string }).name ?? '') : String(v)).trim())
-      .filter(Boolean);
+    const choices = vars.map((v) => (v != null && typeof v === 'object' && 'name' in v ? String((v as { name?: string }).name ?? '') : String(v)).trim()).filter(Boolean);
     if (choices.length === 0) return [];
     return [{ label: '옵션', choices }];
   })();
@@ -125,7 +121,7 @@ export default function ProductDetail() {
         setProduct(data);
         setQuantity(1);
         const opts = Array.isArray(data.options) && data.options.length > 0 ? data.options : [];
-        const groupsCount = opts.length > 0 ? opts.length : (Array.isArray(data.variants) && data.variants.length > 0 ? 1 : 0);
+        const groupsCount = opts.length > 0 ? opts.length : Array.isArray(data.variants) && data.variants.length > 0 ? 1 : 0;
         setOptionValues(Array(groupsCount).fill(''));
       } catch (err) {
         console.error(err);
@@ -140,14 +136,10 @@ export default function ProductDetail() {
   const title = product?.name || '[15+15 특가] 닭신 오븐구이 닭안심살 7종 골라담기';
   const salePrice = product?.price ?? 0;
   const originalPrice = product?.originalPrice;
-  const discountRate =
-    product?.discountRate ??
-    (originalPrice != null && originalPrice > 0 ? Math.round((1 - salePrice / originalPrice) * 100) : undefined);
+  const discountRate = product?.discountRate ?? (originalPrice != null && originalPrice > 0 ? Math.round((1 - salePrice / originalPrice) * 100) : undefined);
 
   const hasOptionGroups = optionGroups.length > 0;
-  const allOptionsSelected =
-    !hasOptionGroups ||
-    optionValues.slice(0, optionGroups.length).every((v) => typeof v === 'string' && v.trim().length > 0);
+  const allOptionsSelected = !hasOptionGroups || optionValues.slice(0, optionGroups.length).every((v) => typeof v === 'string' && v.trim().length > 0);
   const totalPrice = product && allOptionsSelected ? product.price * Math.max(1, quantity) : 0;
 
   return (
@@ -172,15 +164,9 @@ export default function ProductDetail() {
             <div className={styles.productPriceWrap}>
               <span className={styles.label}>판매가격</span>
               <div className={styles.priceRow}>
-                {originalPrice != null && originalPrice > salePrice && (
-                  <span className={styles.priceOriginal}>{originalPrice.toLocaleString()}원</span>
-                )}
+                {originalPrice != null && originalPrice > salePrice && <span className={styles.priceOriginal}>{originalPrice.toLocaleString()}원</span>}
                 <strong className={styles.priceSale}>{salePrice.toLocaleString()}원</strong>
-                {(discountRate != null && discountRate > 0) || (originalPrice != null && originalPrice > salePrice) ? (
-                  <span className={styles.discountRate}>
-                    {discountRate != null && discountRate > 0 ? `${discountRate}%` : `${Math.round((1 - salePrice / originalPrice!) * 100)}%`}
-                  </span>
-                ) : null}
+                {(discountRate != null && discountRate > 0) || (originalPrice != null && originalPrice > salePrice) ? <span className={styles.discountRate}>{discountRate != null && discountRate > 0 ? `${discountRate}%` : `${Math.round((1 - salePrice / originalPrice!) * 100)}%`}</span> : null}
               </div>
             </div>
 
@@ -191,39 +177,32 @@ export default function ProductDetail() {
               </p>
             </div>
 
-            {optionGroups.length > 0 && optionGroups.map((group, i) => (
-              <ProductOptions
-                key={i}
-                label={group.label || `옵션 ${i + 1}`}
-                options={group.choices?.length ? group.choices : []}
-                value={optionValues[i] ?? ''}
-                onChange={(v) => setOptionValues((prev) => {
-                  const next = [...prev];
-                  next[i] = v;
-                  return next;
-                })}
-              />
-            ))}
+            {optionGroups.length > 0 &&
+              optionGroups.map((group, i) => (
+                <ProductOptions
+                  key={i}
+                  label={group.label || `옵션 ${i + 1}`}
+                  options={group.choices?.length ? group.choices : []}
+                  value={optionValues[i] ?? ''}
+                  onChange={(v) =>
+                    setOptionValues((prev) => {
+                      const next = [...prev];
+                      next[i] = v;
+                      return next;
+                    })
+                  }
+                />
+              ))}
 
             <div className={styles.productTotal}>
               <div className={styles.quantityRow}>
                 <span>수량</span>
                 <div className={styles.quantityControls}>
-                  <button
-                    type="button"
-                    className={styles.quantityBtn}
-                    onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
-                    aria-label="수량 줄이기"
-                  >
+                  <button type="button" className={styles.quantityBtn} onClick={() => setQuantity((prev) => Math.max(1, prev - 1))} aria-label="수량 줄이기">
                     −
                   </button>
                   <span className={styles.quantityValue}>{quantity}</span>
-                  <button
-                    type="button"
-                    className={styles.quantityBtn}
-                    onClick={() => setQuantity((prev) => prev + 1)}
-                    aria-label="수량 늘리기"
-                  >
+                  <button type="button" className={styles.quantityBtn} onClick={() => setQuantity((prev) => prev + 1)} aria-label="수량 늘리기">
                     +
                   </button>
                 </div>

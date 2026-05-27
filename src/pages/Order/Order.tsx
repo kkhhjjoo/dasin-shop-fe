@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useCart, type CartItem } from '../../context/CartContext';
 import style from './Order.module.css';
-const API_BASE = import.meta.env.VITE_API_BASE;
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 interface BuyNowState {
   buyNow?: CartItem;
@@ -24,12 +24,7 @@ declare global {
   }
 }
 
-const PROVINCES = [
-  '서울특별시', '부산광역시', '대구광역시', '인천광역시', '광주광역시',
-  '대전광역시', '울산광역시', '세종특별자치시', '경기도', '강원특별자치도',
-  '충청북도', '충청남도', '전북특별자치도', '전라남도', '경상북도',
-  '경상남도', '제주특별자치도',
-];
+const PROVINCES = ['서울특별시', '부산광역시', '대구광역시', '인천광역시', '광주광역시', '대전광역시', '울산광역시', '세종특별자치시', '경기도', '강원특별자치도', '충청북도', '충청남도', '전북특별자치도', '전라남도', '경상북도', '경상남도', '제주특별자치도'];
 
 export default function Order() {
   const navigate = useNavigate();
@@ -68,15 +63,42 @@ export default function Order() {
 
   const handlePayment = () => {
     if (isSubmitting) return;
-    if (!name.trim()) { alert('이름을 입력해 주세요.'); return; }
-    if (!phone.trim()) { alert('연락처를 입력해 주세요.'); return; }
-    if (!email.trim()) { alert('이메일을 입력해 주세요.'); return; }
-    if (!zipCode.trim()) { alert('우편번호를 입력해 주세요.'); return; }
-    if (!province) { alert('도 / 광역시를 선택해 주세요.'); return; }
-    if (!district.trim()) { alert('구/군/시를 입력해 주세요.'); return; }
-    if (!address.trim()) { alert('상세주소를 입력해 주세요.'); return; }
-    if (!API_BASE) { alert('주문 API 주소가 설정되지 않았습니다. 관리자에게 문의해 주세요.'); return; }
-    if (!window.IMP) { alert('결제 모듈을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.'); return; }
+    if (!name.trim()) {
+      alert('이름을 입력해 주세요.');
+      return;
+    }
+    if (!phone.trim()) {
+      alert('연락처를 입력해 주세요.');
+      return;
+    }
+    if (!email.trim()) {
+      alert('이메일을 입력해 주세요.');
+      return;
+    }
+    if (!zipCode.trim()) {
+      alert('우편번호를 입력해 주세요.');
+      return;
+    }
+    if (!province) {
+      alert('도 / 광역시를 선택해 주세요.');
+      return;
+    }
+    if (!district.trim()) {
+      alert('구/군/시를 입력해 주세요.');
+      return;
+    }
+    if (!address.trim()) {
+      alert('상세주소를 입력해 주세요.');
+      return;
+    }
+    if (!API_BASE) {
+      alert('주문 API 주소가 설정되지 않았습니다. 관리자에게 문의해 주세요.');
+      return;
+    }
+    if (!window.IMP) {
+      alert('결제 모듈을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.');
+      return;
+    }
 
     const merchantUid = `order_${Date.now()}`;
     setIsSubmitting(true);
@@ -184,7 +206,9 @@ export default function Order() {
         <h1 className={style.pageTitle}>주문</h1>
         <div className={style.empty}>
           <p>{isBuyNow ? '주문할 상품 정보가 없습니다.' : '장바구니에 담긴 상품이 없습니다.'}</p>
-          <Link to="/" className={style.emptyLink}>상품 담으러 가기</Link>
+          <Link to="/" className={style.emptyLink}>
+            상품 담으러 가기
+          </Link>
         </div>
       </div>
     );
@@ -199,37 +223,21 @@ export default function Order() {
         <h2 className={style.sectionTitle}>주문자 정보</h2>
 
         <div className={style.fieldWrap}>
-          <input
-            type="text"
-            className={style.input}
-            placeholder="이름"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+          <input type="text" className={style.input} placeholder="이름" value={name} onChange={(e) => setName(e.target.value)} />
         </div>
 
         <div className={style.fieldWrap}>
           <div className={style.inputWithIcon}>
-            <input
-              type="tel"
-              className={style.input}
-              placeholder="연락처"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-            <span className={style.helpIcon} title="숫자만 입력해 주세요">?</span>
+            <input type="tel" className={style.input} placeholder="연락처" value={phone} onChange={(e) => setPhone(e.target.value)} />
+            <span className={style.helpIcon} title="숫자만 입력해 주세요">
+              ?
+            </span>
           </div>
           <p className={style.fieldHint}>배송을 위해 정확한 전화번호를 입력하셔야 합니다.</p>
         </div>
 
         <div className={style.fieldWrap}>
-          <input
-            type="email"
-            className={style.input}
-            placeholder="이메일"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <input type="email" className={style.input} placeholder="이메일" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
       </section>
 
@@ -239,71 +247,40 @@ export default function Order() {
 
         <div className={style.fieldWrap}>
           <div className={style.zipRow}>
-            <input
-              type="text"
-              className={style.input}
-              placeholder="우편번호 5자리"
-              maxLength={5}
-              value={zipCode}
-              onChange={(e) => setZipCode(e.target.value.replace(/\D/g, ''))}
-            />
-            <button type="button" className={style.zipBtn}>주소 찾기</button>
+            <input type="text" className={style.input} placeholder="우편번호 5자리" maxLength={5} value={zipCode} onChange={(e) => setZipCode(e.target.value.replace(/\D/g, ''))} />
+            <button type="button" className={style.zipBtn}>
+              주소 찾기
+            </button>
           </div>
         </div>
 
         <div className={style.fieldWrap}>
           <div className={style.selectWrap}>
-            <select
-              className={style.select}
-              value={province}
-              onChange={(e) => setProvince(e.target.value)}
-            >
+            <select className={style.select} value={province} onChange={(e) => setProvince(e.target.value)}>
               <option value="">도 / 광역시</option>
               {PROVINCES.map((p) => (
-                <option key={p} value={p}>{p}</option>
+                <option key={p} value={p}>
+                  {p}
+                </option>
               ))}
             </select>
           </div>
         </div>
 
         <div className={style.fieldWrap}>
-          <input
-            type="text"
-            className={style.input}
-            placeholder="구/군/시"
-            value={district}
-            onChange={(e) => setDistrict(e.target.value)}
-          />
+          <input type="text" className={style.input} placeholder="구/군/시" value={district} onChange={(e) => setDistrict(e.target.value)} />
         </div>
 
         <div className={style.fieldWrap}>
-          <input
-            type="text"
-            className={style.input}
-            placeholder="상세주소"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
+          <input type="text" className={style.input} placeholder="상세주소" value={address} onChange={(e) => setAddress(e.target.value)} />
         </div>
 
         <div className={style.fieldWrap}>
-          <input
-            type="text"
-            className={style.input}
-            placeholder="나머지 주소 (선택)"
-            value={addressDetail}
-            onChange={(e) => setAddressDetail(e.target.value)}
-          />
+          <input type="text" className={style.input} placeholder="나머지 주소 (선택)" value={addressDetail} onChange={(e) => setAddressDetail(e.target.value)} />
         </div>
 
         <div className={style.fieldWrap}>
-          <input
-            type="text"
-            className={style.input}
-            placeholder="배송 메모 (선택)"
-            value={memo}
-            onChange={(e) => setMemo(e.target.value)}
-          />
+          <input type="text" className={style.input} placeholder="배송 메모 (선택)" value={memo} onChange={(e) => setMemo(e.target.value)} />
         </div>
       </section>
 
@@ -313,16 +290,10 @@ export default function Order() {
         <ul className={style.itemList}>
           {items.map((item) => (
             <li key={item._id} className={style.item}>
-              {item.imageUrl ? (
-                <img src={item.imageUrl} alt="" className={style.itemImage} />
-              ) : (
-                <div className={style.itemImagePlaceholder} />
-              )}
+              {item.imageUrl ? <img src={item.imageUrl} alt="" className={style.itemImage} /> : <div className={style.itemImagePlaceholder} />}
               <div className={style.itemBody}>
                 <span className={style.itemName}>{item.name}</span>
-                {item.selectedOptions && item.selectedOptions.length > 0 && (
-                  <span className={style.itemOptions}>{item.selectedOptions.join(', ')}</span>
-                )}
+                {item.selectedOptions && item.selectedOptions.length > 0 && <span className={style.itemOptions}>{item.selectedOptions.join(', ')}</span>}
                 <span className={style.itemQty}>수량 {item.quantity}개</span>
               </div>
               <span className={style.itemSubtotal}>{(item.price * item.quantity).toLocaleString()}원</span>
@@ -349,7 +320,9 @@ export default function Order() {
             상품 페이지로 돌아가기
           </button>
         ) : (
-          <Link to="/cart" className={style.backBtn}>장바구니로 돌아가기</Link>
+          <Link to="/cart" className={style.backBtn}>
+            장바구니로 돌아가기
+          </Link>
         )}
         <button type="button" className={style.payBtn} onClick={handlePayment} disabled={isSubmitting}>
           {isSubmitting ? '처리 중...' : '주문하기'}

@@ -1,24 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import {
-  type OrderStatusKo,
-  normalizeOrderStatus,
-  orderStatusToSlug,
-  isCancellableStatus,
-} from '../../utils/orderStatus';
+import { type OrderStatusKo, normalizeOrderStatus, orderStatusToSlug, isCancellableStatus } from '../../utils/orderStatus';
 import style from './Orders.module.css';
 
-const API_BASE = import.meta.env.VITE_API_BASE;
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 /** 주문 내역 화면 탭(결제대기·결제완료는 목록에서 제외) */
-const ORDER_TAB_STATUSES = [
-  '상품준비중',
-  '배송중',
-  '배송완료',
-  '취소',
-  '환불',
-] as const satisfies readonly OrderStatusKo[];
+const ORDER_TAB_STATUSES = ['상품준비중', '배송중', '배송완료', '취소', '환불'] as const satisfies readonly OrderStatusKo[];
 
 type TabValue = 'all' | (typeof ORDER_TAB_STATUSES)[number];
 
@@ -49,10 +38,7 @@ interface OrderListItem {
   };
 }
 
-const TABS: { value: TabValue; label: string }[] = [
-  { value: 'all', label: '전체' },
-  ...ORDER_TAB_STATUSES.map((value) => ({ value, label: value })),
-];
+const TABS: { value: TabValue; label: string }[] = [{ value: 'all', label: '전체' }, ...ORDER_TAB_STATUSES.map((value) => ({ value, label: value }))];
 
 export default function Orders() {
   const navigate = useNavigate();
@@ -133,9 +119,7 @@ export default function Orders() {
         return;
       }
       const nextStatus = normalizeOrderStatus(data.status);
-      setOrders((prev) =>
-        prev.map((o) => (o._id === orderId ? { ...o, status: nextStatus } : o)),
-      );
+      setOrders((prev) => prev.map((o) => (o._id === orderId ? { ...o, status: nextStatus } : o)));
       toast.success('주문이 취소되었습니다.');
     } catch {
       toast.error('주문 취소 중 오류가 발생했습니다.');
@@ -165,27 +149,14 @@ export default function Orders() {
   return (
     <div className={style.page}>
       <h1 className={style.pageTitle}>주문 내역</h1>
-      <p className={style.pageMeta}>
-        {hasNoOrders
-          ? '주문 0건'
-          : statusTab === 'all'
-            ? `전체 ${orders.length}건`
-            : `「${statusTab}」 ${filteredOrders.length}건 · 전체 ${orders.length}건`}
-      </p>
+      <p className={style.pageMeta}>{hasNoOrders ? '주문 0건' : statusTab === 'all' ? `전체 ${orders.length}건` : `「${statusTab}」 ${filteredOrders.length}건 · 전체 ${orders.length}건`}</p>
 
       <div className={style.tabRow} role="tablist" aria-label="주문 상태별 필터">
         {TABS.map((tab) => {
-          const count = tab.value === 'all' ? tabCounts.all : tabCounts[tab.value] ?? 0;
+          const count = tab.value === 'all' ? tabCounts.all : (tabCounts[tab.value] ?? 0);
           const active = statusTab === tab.value;
           return (
-            <button
-              key={tab.value}
-              type="button"
-              role="tab"
-              aria-selected={active}
-              className={`${style.tabBtn} ${active ? style.tabBtnActive : ''}`}
-              onClick={() => setStatusTab(tab.value)}
-            >
+            <button key={tab.value} type="button" role="tab" aria-selected={active} className={`${style.tabBtn} ${active ? style.tabBtnActive : ''}`} onClick={() => setStatusTab(tab.value)}>
               {tab.label}
               <span className={style.tabCount}>{count}</span>
             </button>
@@ -216,10 +187,7 @@ export default function Orders() {
               .map((it) => `${it.productName} x${it.quantity}`)
               .slice(0, 2)
               .join(', ');
-            const more =
-              Array.isArray(order.items) && order.items.length > 2
-                ? ` 외 ${order.items.length - 2}건`
-                : '';
+            const more = Array.isArray(order.items) && order.items.length > 2 ? ` 외 ${order.items.length - 2}건` : '';
 
             return (
               <li key={order._id} className={style.orderItem}>
@@ -228,9 +196,7 @@ export default function Orders() {
                     <span className={style.orderDate}>{placed}</span>
                     <span className={style.orderNumber}>주문번호 {orderNumber}</span>
                   </div>
-                  <span className={`${style.statusBadge} ${style[`status_${slug}`] ?? ''}`}>
-                    {statusLabel}
-                  </span>
+                  <span className={`${style.statusBadge} ${style[`status_${slug}`] ?? ''}`}>{statusLabel}</span>
                 </div>
 
                 <div className={style.orderBody}>
@@ -243,15 +209,9 @@ export default function Orders() {
                       {order.items.map((it, idx) => (
                         <li key={idx} className={style.item}>
                           <span className={style.itemName}>{it.productName}</span>
-                          {Array.isArray(it.selectedOptions) && it.selectedOptions.length > 0 && (
-                            <span className={style.itemOptions}>
-                              {it.selectedOptions.join(', ')}
-                            </span>
-                          )}
+                          {Array.isArray(it.selectedOptions) && it.selectedOptions.length > 0 && <span className={style.itemOptions}>{it.selectedOptions.join(', ')}</span>}
                           <span className={style.itemQty}>x {it.quantity}</span>
-                          <span className={style.itemPrice}>
-                            {(it.itemTotal ?? 0).toLocaleString()}원
-                          </span>
+                          <span className={style.itemPrice}>{(it.itemTotal ?? 0).toLocaleString()}원</span>
                         </li>
                       ))}
                     </ul>
@@ -262,11 +222,7 @@ export default function Orders() {
                   <span className={style.priceLabel}>총 결제 금액</span>
                   <strong className={style.priceValue}>{finalPrice.toLocaleString()}원</strong>
                   {canCancel && (
-                    <button
-                      type="button"
-                      className={style.cancelBtn}
-                      onClick={() => handleCancel(order._id)}
-                    >
+                    <button type="button" className={style.cancelBtn} onClick={() => handleCancel(order._id)}>
                       주문 취소
                     </button>
                   )}

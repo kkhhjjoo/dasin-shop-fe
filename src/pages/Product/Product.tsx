@@ -4,7 +4,7 @@ import { useCart } from '../../context/CartContext';
 import { productHasConfigurableOptions } from '../../utils/productOptions';
 import style from './Product.module.css';
 
-const API_BASE = import.meta.env.VITE_API_BASE;
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 type SortType = 'rank' | 'newest' | 'price';
 
@@ -123,97 +123,80 @@ const Product = () => {
         <p className={style.productPageEmpty}>등록된 상품이 없습니다.</p>
       ) : (
         <>
-        <ul className={style.productPageList}>
-          {products.map((product) => (
-            <li
-              key={product._id}
-              className={style.productCard}
-              onClick={() => navigate(`/detail/${product._id}`)}
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  navigate(`/detail/${product._id}`);
-                }
-              }}
-            >
-              <div className={style.productCardImageWrap}>
-                {product.imageUrl ? <img src={product.imageUrl} alt={product.name} className={style.productCardImage} /> : <div className={style.productCardImage} style={{ background: '#eee' }} />}
-                {product.badge && <span className={style.productCardBadge}>{product.badge}</span>}
-                <button
-                  type="button"
-                  className={style.productCardCartBtn}
-                  aria-label="장바구니 담기"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (productHasConfigurableOptions(product)) {
-                      alert('옵션을 선택한 뒤 장바구니에 담을 수 있습니다.');
-                      navigate(`/detail/${product._id}`);
-                      return;
-                    }
-                    addToCart({
-                      _id: product._id,
-                      name: product.name,
-                      price: product.price,
-                      imageUrl: product.imageUrl,
-                    });
-                  }}
-                >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                    <line x1="3" y1="6" x2="21" y2="6" />
-                    <path d="M16 10a4 4 0 0 1-8 0" />
-                  </svg>
-                </button>
-              </div>
-              <div className={style.productCardBody}>
-                <h3 className={style.productCardTitle}>{product.name}</h3>
-                <div className={style.productCardPriceRow}>
-                  {product.originalPrice != null && product.originalPrice > product.price && (
-                    <span className={style.productCardOriginalPrice}>{product.originalPrice.toLocaleString()}원</span>
-                  )}
-                  <span className={style.productCardPrice}>{product.price.toLocaleString()}원</span>
-                  {(product.discountRate != null && product.discountRate > 0) ||
-                  (product.originalPrice != null && product.originalPrice > product.price) ? (
-                    <span className={style.productCardDiscount}>
-                      {product.discountRate != null && product.discountRate > 0
-                        ? `${product.discountRate}%`
-                        : `${Math.round((1 - product.price / product.originalPrice!) * 100)}%`}
-                    </span>
-                  ) : null}
+          <ul className={style.productPageList}>
+            {products.map((product) => (
+              <li
+                key={product._id}
+                className={style.productCard}
+                onClick={() => navigate(`/detail/${product._id}`)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    navigate(`/detail/${product._id}`);
+                  }
+                }}
+              >
+                <div className={style.productCardImageWrap}>
+                  {product.imageUrl ? <img src={product.imageUrl} alt={product.name} className={style.productCardImage} /> : <div className={style.productCardImage} style={{ background: '#eee' }} />}
+                  {product.badge && <span className={style.productCardBadge}>{product.badge}</span>}
+                  <button
+                    type="button"
+                    className={style.productCardCartBtn}
+                    aria-label="장바구니 담기"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (productHasConfigurableOptions(product)) {
+                        alert('옵션을 선택한 뒤 장바구니에 담을 수 있습니다.');
+                        navigate(`/detail/${product._id}`);
+                        return;
+                      }
+                      addToCart({
+                        _id: product._id,
+                        name: product.name,
+                        price: product.price,
+                        imageUrl: product.imageUrl,
+                      });
+                    }}
+                  >
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+                      <line x1="3" y1="6" x2="21" y2="6" />
+                      <path d="M16 10a4 4 0 0 1-8 0" />
+                    </svg>
+                  </button>
                 </div>
-                {product.description && <p className={style.productCardDesc}>{product.description}</p>}
-                <div className={style.productCardFooter}>
-                  <span className={style.productCardReviews}>리뷰: -</span>
+                <div className={style.productCardBody}>
+                  <h3 className={style.productCardTitle}>{product.name}</h3>
+                  <div className={style.productCardPriceRow}>
+                    {product.originalPrice != null && product.originalPrice > product.price && <span className={style.productCardOriginalPrice}>{product.originalPrice.toLocaleString()}원</span>}
+                    <span className={style.productCardPrice}>{product.price.toLocaleString()}원</span>
+                    {(product.discountRate != null && product.discountRate > 0) || (product.originalPrice != null && product.originalPrice > product.price) ? (
+                      <span className={style.productCardDiscount}>{product.discountRate != null && product.discountRate > 0 ? `${product.discountRate}%` : `${Math.round((1 - product.price / product.originalPrice!) * 100)}%`}</span>
+                    ) : null}
+                  </div>
+                  {product.description && <p className={style.productCardDesc}>{product.description}</p>}
+                  <div className={style.productCardFooter}>
+                    <span className={style.productCardReviews}>리뷰: -</span>
+                  </div>
                 </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-        {pagination && (
-          <nav className={style.pagination} aria-label="페이지 네비게이션">
-            <button
-              type="button"
-              className={style.paginationBtn}
-              disabled={page <= 1}
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-            >
-              이전
-            </button>
-            <span className={style.paginationInfo}>
-              {page} / {pagination.totalPages}
-            </span>
-            <button
-              type="button"
-              className={style.paginationBtn}
-              disabled={page >= pagination.totalPages}
-              onClick={() => setPage((p) => Math.min(pagination.totalPages, p + 1))}
-            >
-              다음
-            </button>
-          </nav>
-        )}
+              </li>
+            ))}
+          </ul>
+          {pagination && (
+            <nav className={style.pagination} aria-label="페이지 네비게이션">
+              <button type="button" className={style.paginationBtn} disabled={page <= 1} onClick={() => setPage((p) => Math.max(1, p - 1))}>
+                이전
+              </button>
+              <span className={style.paginationInfo}>
+                {page} / {pagination.totalPages}
+              </span>
+              <button type="button" className={style.paginationBtn} disabled={page >= pagination.totalPages} onClick={() => setPage((p) => Math.min(pagination.totalPages, p + 1))}>
+                다음
+              </button>
+            </nav>
+          )}
         </>
       )}
     </div>

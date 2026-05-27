@@ -7,7 +7,7 @@ import { CartProvider } from './context/CartContext';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
 
-const API_BASE = import.meta.env.VITE_API_BASE;
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 function App() {
   const [user, setUser] = useState<{ name: string; user_type?: string } | null>(null);

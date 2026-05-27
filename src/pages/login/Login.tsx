@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 
 import style from './Login.module.css';
 
-const API_BASE = import.meta.env.VITE_API_BASE;
+const API_BASE = import.meta.env.VITE_API_BASE || '';
 
 export default function Login() {
   const navigate = useNavigate();
