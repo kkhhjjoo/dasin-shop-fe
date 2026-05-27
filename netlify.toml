@@ -1,5 +1,5 @@
 [[redirects]]
   from = "/api/*"
-  to = "https://dasin-shop-env.eba-mqwig9vh.us-east-2.elasticbeanstalk.com/api/:splat"
+  to = "http://dasin-shop-env.eba-mqwig9vh.us-east-2.elasticbeanstalk.com/api/:splat"
   status = 200
   force = true
